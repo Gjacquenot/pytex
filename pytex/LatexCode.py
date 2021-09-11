@@ -20,10 +20,10 @@
 
 import codecs
 
-from src.utilities import ensure_unicode
-from src.utilities import RemoveComments
-from src.InputPaths import InputPaths
-from src.RoughSources import LatexCodeToRoughSource
+from .utilities import ensure_unicode
+from .utilities import RemoveComments
+from .InputPaths import InputPaths
+from .RoughSources import LatexCodeToRoughSource
 
 
 def inherit_properties(f):
@@ -90,7 +90,7 @@ class LatexCode(object):
         The fact to copy properties here (like 'input_paths') is not really
         efficient because the majority of operations are replacements and
         are returning new objects.
-        See for example 
+        See for example
         RoughSources.LatexCodeToRoughSource
         Although 'new_code' is at the beginning a 'copy', we still have to update
         by hand the input_list.
@@ -132,7 +132,7 @@ class LatexCode(object):
 
         It it appears many times, return the last time, and prints a warning.
 
-        If not found, raise an newlabelNotFound exception 
+        If not found, raise an newlabelNotFound exception
         """
         list_newlabel = self.analyse_use_of_macro("\\newlabel", 2)
         if label_name not in [x.name for x in list_newlabel]:
@@ -154,7 +154,7 @@ class LatexCode(object):
 
         If give_configuration is True, return a tuple of two lists.
         - The first list is the same as with give_configuration=False
-        - The second gives the text between the occurrences. 
+        - The second gives the text between the occurrences.
 
         The ith element of the configuration list is what precedes
         the ith element of the occurrence list.
@@ -164,7 +164,7 @@ class LatexCode(object):
         """
         # Why should I explicitly write the "\" in the macro name ?
         # I don't remember, but it was an issue.
-        from src.MacroUse import SearchUseOfMacro
+        from .MacroUse import SearchUseOfMacro
         return SearchUseOfMacro(self, name, number_of_arguments, give_configuration, fast=fast)
 
     def analyse_use_of_macro(self, name, number_of_arguments=None):
@@ -183,7 +183,7 @@ class LatexCode(object):
 
     def dict_of_definition_macros(self):
         r"""
-        Returns a dictionary which gives, for each name of macros found to be defined in self.text, the occurrence 
+        Returns a dictionary which gives, for each name of macros found to be defined in self.text, the occurrence
         in which it was defined.
         If X is the output of dict_of_definition_macro, X.keys() is the list of the names of the macros and
         X.values() is the list of definition (type Occurrence_newcommand).
@@ -218,7 +218,7 @@ class LatexCode(object):
 
     def substitute_occurrence_input(self, occurrence, substitution_text):
         """
-        - `occurrence` is the occurrence of an \input{<filename>}. 
+        - `occurrence` is the occurrence of an \input{<filename>}.
         - `substitution_text` is the text with whom we have to
            substitute the occurrence of \input
 
@@ -236,7 +236,7 @@ class LatexCode(object):
 
     def substitute_all_inputs(self, fast=False, input_paths=None):
         r"""
-        Recursively change all the \input{...} by the content of the corresponding file. 
+        Recursively change all the \input{...} by the content of the corresponding file.
         Return a new object LatexCode
         """
         A = LatexCode(self.text_brut)
@@ -273,7 +273,7 @@ class LatexCode(object):
 
     def change_macro_argument(self, macro_name, n, func, n_args):
         r"""
-        Apply the function <func> to the <n>th argument 
+        Apply the function <func> to the <n>th argument
         of each use of <macro_name>.
 
         Return a new_object LatexCode
@@ -298,12 +298,12 @@ class LatexCode(object):
 
     def remove_macro_content(self, macro_name, number_of_arguments):
         r"""
-        Remove the presence of a macro (not its definition). 
+        Remove the presence of a macro (not its definition).
         Example
 
         Hello \MyMacro{guy} how do you do ?
 
-        will become 
+        will become
         Hello how do you do ?
 
         Return a new LatexCode object.
@@ -322,7 +322,7 @@ class LatexCode(object):
 
         Hello \MyMacro{guy} how do you do ?
 
-        will become 
+        will become
         Hello guy how do you do ?
 
         This function only works with a macro which has only one argument.
@@ -347,8 +347,8 @@ class LatexCode(object):
 
     @inherit_properties
     def replace(self, textA, textB):
-        """ 
-        Replace textA by textB including in the comments 
+        """
+        Replace textA by textB including in the comments
         """
         textA = ensure_unicode(textA)
         textB = ensure_unicode(textB)

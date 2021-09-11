@@ -28,10 +28,10 @@ import os
 import hashlib
 from xml.dom import minidom
 
-from src.all import FileToText
-from src.LatexCode import LatexCode
+from .all import FileToText
+from .LatexCode import LatexCode
 
-# TODO : there should be a possibility to compile "up to all references are correct" from here. 
+# TODO : there should be a possibility to compile "up to all references are correct" from here.
 #       I mean : the checking algorithm should be here.
 class Compilation(object):
     """
@@ -70,7 +70,7 @@ class Compilation(object):
         commande_e="makeindex "+self.generic_basename
         self.do_it(commande_e)
     def nomenclature(self):
-        commande_e="makeindex -s nomencl.ist -o "+self.generic_basename+".nls "+self.generic_basename+".nlo"        
+        commande_e="makeindex -s nomencl.ist -o "+self.generic_basename+".nls "+self.generic_basename+".nlo"
         self.do_it(commande_e)
     def special_stuffs(self):
         self.bibtex()
@@ -107,7 +107,7 @@ class CodeBox(dict):
 
     You create your box with
     box = CodeBox("MyDict")
-    the name of the box is "MyDict". 
+    the name of the box is "MyDict".
 
     The line to be put in your LaTeX file is like
     \PutMyDict{foo}{an example box}
@@ -148,9 +148,9 @@ class CodeBox(dict):
     def put(self,codeLaTeX,tag):
         # This function is added to the plugin list of Request when using the method Request.create_magic_box
         r"""
-        Substitute the dictionary inside codeLaTeX. 
+        Substitute the dictionary inside codeLaTeX.
             If we continue the example of the method CodeBox.feed, the line
-            \PutMyDict{mylabel} 
+            \PutMyDict{mylabel}
             will be changed to
             This is my \LaTeX\ code.
         You can (this is the aim!) substitute the code at several places.
@@ -277,7 +277,7 @@ class FileTracking(object):
     try :
         root = minidom.parse(xml_filename)
         fileNodes = root.getElementsByTagName(ELEMENT_FOLLOWED_FILES)
-        for fileNode in fileNodes: 
+        for fileNode in fileNodes:
             for fich in fileNode.getElementsByTagName(TAG_FICHIER):
                 old_sha[fich.getAttribute("name")]=fich.getAttribute("sha1sum")
     except :
@@ -361,7 +361,7 @@ class Array(object):
         'dic' is the dictionary that gives the texts to be put in the array.
 
         (0,0) (1,0) (2,0) (3,0) etc
-        (0,1) (1,1) (2,1) (3,1) etc 
+        (0,1) (1,1) (2,1) (3,1) etc
         etc
         """
         self.dic=dic

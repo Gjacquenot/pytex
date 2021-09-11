@@ -21,14 +21,14 @@
 """Expose a class to manipulate/read a LaTeX log file."""
 
 
-from src.Warnings import ReferenceWarning
-from src.Warnings import MultiplyLabelWarning
-from src.Warnings import CitationWarning
-from src.Warnings import LabelWarning
-from src.Warnings import OverfullWarning
-from src.Warnings import TeXCapacityExceededWarning
-from src.utilities import IndentPrint
-from src.utilities import is_empty_line
+from .Warnings import ReferenceWarning
+from .Warnings import MultiplyLabelWarning
+from .Warnings import CitationWarning
+from .Warnings import LabelWarning
+from .Warnings import OverfullWarning
+from .Warnings import TeXCapacityExceededWarning
+from .utilities import IndentPrint
+from .utilities import is_empty_line
 
 dprint = print      # pylint: disable=invalid-name
 

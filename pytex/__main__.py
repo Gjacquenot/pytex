@@ -25,14 +25,14 @@ import subprocess
 import importlib
 from pathlib import Path
 
-from src.utilities import logging
-from src.future_verif import get_future_warning
-from src.all import FileToText
-from src.all import FileToLatexCode
-from src.all import FileToLogCode
-from src.all import string_to_latex_code
-from src.PytexTools import Compilation
-from src.grep_wrapper import PytexGrep
+from .utilities import logging
+from .future_verif import get_future_warning
+from .all import FileToText
+from .all import FileToLatexCode
+from .all import FileToLogCode
+from .all import string_to_latex_code
+from .PytexTools import Compilation
+from .grep_wrapper import PytexGrep
 
 
 dprint = print

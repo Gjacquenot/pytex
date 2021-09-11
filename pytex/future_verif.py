@@ -11,8 +11,8 @@ import os
 import hashlib
 import pygrep
 
-from src.utilities import ReferenceNotFoundException
-from src.future_reference import FutureReference
+from .utilities import ReferenceNotFoundException
+from .future_reference import FutureReference
 
 dprint = print
 
